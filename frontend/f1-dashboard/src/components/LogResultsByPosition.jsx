@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./LogResultsByPosition.css";
 
-// Helper function to calculate points based on position
 const calculatePoints = (position) => {
   if (position <= 0 || position > 10) return 0;
   const pointsMap = {
@@ -21,23 +20,20 @@ const calculatePoints = (position) => {
   return pointsMap[position] || 0;
 };
 
-// Helper to convert time string to milliseconds (for FL ranking)
 const timeToMilliseconds = (timeStr) => {
   if (!timeStr || typeof timeStr !== "string") return Infinity;
   const parts = timeStr.split(":");
   let totalMilliseconds = 0;
   if (parts.length === 2) {
-    // mm:ss.SSS
     const [m, sMs] = parts;
     const [s, ms] = sMs.split(".");
     totalMilliseconds =
       parseInt(m) * 60 * 1000 + parseInt(s) * 1000 + parseInt(ms || "0");
   } else if (parts.length === 1 && timeStr.includes(".")) {
-    // ss.SSS
     const [s, ms] = timeStr.split(".");
     totalMilliseconds = parseInt(s || "0") * 1000 + parseInt(ms || "0");
   } else {
-    return Infinity; // Invalid format for lap time
+    return Infinity;
   }
   return totalMilliseconds;
 };
@@ -48,13 +44,12 @@ export default function LogResultsByPosition() {
 
   const [race, setRace] = useState(null);
   const [allDrivers, setAllDrivers] = useState([]);
-  const [resultsByPosition, setResultsByPosition] = useState([]); // Start empty
+  const [resultsByPosition, setResultsByPosition] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch initial data
   useEffect(() => {
     const isAdmin = localStorage.getItem("isAdmin") === "true";
     if (!isAdmin) {
@@ -80,7 +75,6 @@ export default function LogResultsByPosition() {
           ? existingResultsRes.data
           : [];
 
-        // Only prefill with existing results (no empty positions)
         const prefilledResults = existingResults.map((res) => ({
           ...res,
           fastestLap: res.fastestLap || { rank: 0, time: "" },
@@ -97,7 +91,6 @@ export default function LogResultsByPosition() {
     fetchData();
   }, [raceId, navigate]);
 
-  // Get available drivers (not yet assigned to a position)
   const getAvailableDrivers = useCallback(() => {
     const assignedDriverIds = resultsByPosition
       .map((r) => r.driverId)
@@ -105,17 +98,14 @@ export default function LogResultsByPosition() {
     return allDrivers.filter((d) => !assignedDriverIds.includes(d.id));
   }, [allDrivers, resultsByPosition]);
 
-  // Handle input changes for a specific position
   const handleInputChange = (position, field, value, driverId) => {
     setResultsByPosition((prev) =>
       prev.map((res) => {
-        // For DNF, use driverId as identifier since position is -1
         const isMatch =
           position === -1
             ? res.position === -1 && res.driverId === driverId
             : res.position === position;
         if (isMatch) {
-          // If changing driver, update teamId too
           if (field === "driverId") {
             const selectedDriver = allDrivers.find((d) => d.id === value);
             return {
@@ -124,7 +114,6 @@ export default function LogResultsByPosition() {
               teamId: selectedDriver?.teamId || null,
             };
           }
-          // Handle fastest lap time separately
           if (field === "fastestLapTime") {
             const updatedFastestLap = {
               ...(res.fastestLap || {}),
@@ -132,7 +121,6 @@ export default function LogResultsByPosition() {
             };
             return { ...res, fastestLap: updatedFastestLap };
           }
-          // If status is set to DNF, clear totalRaceTime
           if (field === "status" && value === "DNF") {
             return { ...res, status: value, totalRaceTime: "" };
           }
@@ -143,7 +131,6 @@ export default function LogResultsByPosition() {
     );
   };
 
-  // Add a new DNF driver entry
   const handleAddDNF = () => {
     setResultsByPosition((prev) => [
       ...prev,
@@ -162,16 +149,14 @@ export default function LogResultsByPosition() {
     ]);
   };
 
-  // Add a new normal position (1-20)
   const handleAddPosition = () => {
-    // Find the next available position from 1 to 20
     const usedPositions = resultsByPosition
       .filter((r) => r.position > 0)
       .map((r) => r.position);
     const nextPos = Array.from({ length: 20 }, (_, i) => i + 1).find(
       (pos) => !usedPositions.includes(pos)
     );
-    if (!nextPos) return; // All positions filled
+    if (!nextPos) return;
 
     setResultsByPosition((prev) => [
       ...prev,
@@ -190,7 +175,6 @@ export default function LogResultsByPosition() {
     ]);
   };
 
-  // Delete a position (normal or DNF)
   const handleDeletePosition = (position, driverId) => {
     setResultsByPosition((prev) =>
       prev.filter((res) =>
@@ -201,15 +185,12 @@ export default function LogResultsByPosition() {
     );
   };
 
-  // Calculate ranks and points, then save
   const handleSave = () => {
     setSaving(true);
     setError(null);
 
-    // Filter out positions where no driver was selected
     const filledResults = resultsByPosition.filter((r) => r.driverId !== null);
 
-    // Calculate Fastest Lap Ranks among those with times
     const resultsWithTimes = filledResults.filter((r) => r.fastestLap?.time);
     const sortedByTime = [...resultsWithTimes].sort(
       (a, b) =>
@@ -221,7 +202,6 @@ export default function LogResultsByPosition() {
       fastestLap: { ...result.fastestLap, rank: index + 1 },
     }));
 
-    // Prepare final DTOs for saving
     const resultsToSave = filledResults.map((result) => {
       const ranked = rankedResults.find((r) => r.driverId === result.driverId);
       const finalFastestLap = ranked
@@ -230,7 +210,6 @@ export default function LogResultsByPosition() {
           ? { ...result.fastestLap, rank: 0 }
           : null;
 
-      // Convert empty string to null for totalRaceTime
       const totalRaceTime =
         result.totalRaceTime && result.totalRaceTime.trim() !== ""
           ? result.totalRaceTime
@@ -257,7 +236,6 @@ export default function LogResultsByPosition() {
       });
   };
 
-  // Delete results for this race
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete all results for this race? This cannot be undone."
@@ -269,7 +247,7 @@ export default function LogResultsByPosition() {
     try {
       await axios.delete(`http://localhost:8080/api/results/${raceId}`);
       setDeleting(false);
-      setResultsByPosition([]); // Reset to empty
+      setResultsByPosition([]);
       alert("Results deleted successfully.");
     } catch (err) {
       setError(`Failed to delete results: ${err.message}. Please try again.`);

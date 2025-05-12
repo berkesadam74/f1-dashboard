@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import './LogResultsPage.css';
 
-// Helper function to calculate points based on position
 const calculatePoints = (position) => {
   if (position <= 0) return 0;
   const pointsMap = {
@@ -13,20 +12,19 @@ const calculatePoints = (position) => {
   return pointsMap[position] || 0;
 };
 
-// Helper to convert time string (like "1:30.123") to milliseconds for comparison
 const timeToMilliseconds = (timeStr) => {
   if (!timeStr || typeof timeStr !== 'string') return Infinity;
   const parts = timeStr.split(':');
   let totalMilliseconds = 0;
-  if (parts.length === 3) { // HH:mm:ss.SSS
+  if (parts.length === 3) {
     const [h, m, sMs] = parts;
     const [s, ms] = sMs.split('.');
     totalMilliseconds = (parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s)) * 1000 + parseInt(ms || '0');
-  } else if (parts.length === 2) { // mm:ss.SSS
+  } else if (parts.length === 2) {
     const [m, sMs] = parts;
     const [s, ms] = sMs.split('.');
     totalMilliseconds = (parseInt(m) * 60 + parseInt(s)) * 1000 + parseInt(ms || '0');
-  } else if (parts.length === 1) { // ss.SSS or just SSS
+  } else if (parts.length === 1) {
     const [sMs] = parts;
     const [s, ms] = sMs.split('.');
     totalMilliseconds = (parseInt(s || '0')) * 1000 + parseInt(ms || '0');
@@ -44,7 +42,7 @@ export default function LogResultsPage() {
   const [driverResults, setDriverResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [deleting, setDeleting] = useState(false); // State for delete
+  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -72,7 +70,6 @@ export default function LogResultsPage() {
         const initialResults = driverList.map(driver => {
           const existing = existingResults.find(res => res.driverId === driver.id);
           if (existing) {
-            // Ensure fastestLap is an object or null, initialize rank if needed
             return {
               ...existing,
               fastestLap: existing.fastestLap || { rank: 0, lapNumber: 0, time: '' }
@@ -100,7 +97,7 @@ export default function LogResultsPage() {
         console.error("Failed to fetch data:", err);
         setError("Failed to load data.");
         setLoading(false);
-        setResults([]); // Ensure results is an empty array on error
+        setResults([]);
         setRace(null);
       }
     };
@@ -128,29 +125,24 @@ export default function LogResultsPage() {
     );
   };
 
-  // Function to calculate fastest lap ranks
   const calculateFastestLapRanks = (results) => {
-    // Filter out results without a fastest lap time
     const resultsWithTimes = results.filter(r => r.fastestLap?.time);
 
-    // Sort by fastest lap time (ascending)
     const sortedByTime = [...resultsWithTimes].sort((a, b) =>
       timeToMilliseconds(a.fastestLap.time) - timeToMilliseconds(b.fastestLap.time)
     );
 
-    // Assign ranks
     const rankedResults = sortedByTime.map((result, index) => ({
       ...result,
       fastestLap: {
         ...result.fastestLap,
-        rank: index + 1 // Rank is 1-based
+        rank: index + 1
       }
     }));
 
-    // Merge ranks back into the original results list (including those without times)
     const finalResults = results.map(result => {
       const ranked = rankedResults.find(r => r.driverId === result.driverId);
-      return ranked ? ranked : result; // Use ranked if found, otherwise original
+      return ranked ? ranked : result;
     });
 
     return finalResults;
@@ -161,30 +153,24 @@ export default function LogResultsPage() {
     setSaving(true);
     setError(null);
 
-    // 1. Calculate Fastest Lap Ranks
     const resultsWithRanks = calculateFastestLapRanks(driverResults);
 
-    // 2. Calculate Points and prepare for saving
     const resultsToSave = resultsWithRanks.map(result => ({
       ...result,
       points: calculatePoints(result.position),
-      // Ensure fastestLap is null if time is empty, otherwise send the object
       fastestLap: (result.fastestLap?.time) ? result.fastestLap : null,
-      // Use the existing createdAt if it's there, otherwise set a new date
       createdAt: result.createdAt || new Date().toISOString(),
-      // Add or update 'id' if it exists (for updating existing results)
       ...(result.id && { id: result.id })
     }));
 
 
-    console.log("Saving results:", resultsToSave); // Debug log
+    console.log("Saving results:", resultsToSave);
 
-    // Determine if creating new or updating existing
     const isUpdating = resultsToSave.some(result => result.id);
 
     const savePromise = isUpdating
-      ? axios.put("http://localhost:8080/api/results", resultsToSave) // Assuming PUT for update
-      : axios.post("http://localhost:8080/api/results", resultsToSave); // POST for create
+      ? axios.put("http://localhost:8080/api/results", resultsToSave)
+      : axios.post("http://localhost:8080/api/results", resultsToSave);
 
     savePromise
       .then(() => {
@@ -207,8 +193,7 @@ export default function LogResultsPage() {
     try {
       await axios.delete(`http://localhost:8080/api/results/${raceId}`);
       setDeleting(false);
-      // Optionally navigate back or show a success message
-      navigate(`/calendar`); // Navigate back to calendar after deleting
+      navigate(`/calendar`);
     } catch (err) {
       console.error("Failed to delete results:", err);
       setError(`Failed to delete results: ${err.message}. Please try again.`);
@@ -226,27 +211,25 @@ export default function LogResultsPage() {
   if (error && !loading) return <div className="log-results-page">{error}</div>;
 
   return (
-    <div className="dashboard-widgets"> {/* Keep this container */}
+    <div className="dashboard-widgets">
       <div className="results-overview-card">
         <button className="results-back" onClick={() => navigate(-1)}>← Back</button>
         <span className="log-results-title">Log Results for {race.raceName}</span>
       </div>
 
-      <div className="log-results-page"> {/* Content area for the form */}
+      <div className="log-results-page">
         <div className="results-entry-grid">
           {driverResults.map(result => (
             <div className="driver-result-entry" key={result.driverId}>
               <span className="driver-name-label">{getDriverName(result.driverId)}</span>
               <div className="result-fields">
-                {/* --- Position --- */}
                 <label>Pos:</label>
                 <input
                   type="number"
-                  value={result.position || ''} // Use || '' for number inputs to avoid React warning
+                  value={result.position || ''}
                   onChange={e => handleInputChange(result.driverId, 'position', parseInt(e.target.value) || 0)}
                 />
 
-                {/* --- Grid Position --- */}
                 <label>Grid:</label>
                 <input
                   type="number"
@@ -255,7 +238,6 @@ export default function LogResultsPage() {
                 />
 
 
-                {/* --- Status --- */}
                 <label>Status:</label>
                 <input
                   type="text"
@@ -263,7 +245,6 @@ export default function LogResultsPage() {
                   onChange={e => handleInputChange(result.driverId, 'status', e.target.value)}
                 />
 
-                {/* --- Total Race Time --- */}
                 <label>Time:</label>
                 <input
                   type="text"
@@ -271,21 +252,18 @@ export default function LogResultsPage() {
                   onChange={e => handleInputChange(result.driverId, 'totalRaceTime', e.target.value)}
                 />
 
-                {/* --- Fastest Lap Fields --- */}
                 <label>FL Time:</label>
                 <input
                   type="text"
-                  value={result.fastestLap?.time || ''} // Use ?. for optional chaining
+                  value={result.fastestLap?.time || ''}
                   onChange={e => handleFastestLapChange(result.driverId, 'time', e.target.value)}
                 />
-                {/* Display calculated rank, not input */}
                 <label>FL Rank:</label>
                 <span className="fastest-lap-rank-display">
                   {result.fastestLap?.rank > 0 ? result.fastestLap.rank : '-'}
                 </span>
 
 
-                {/* --- Points (Calculated, maybe display read-only) --- */}
                 <label>Points:</label>
                 <input
                   type="number"

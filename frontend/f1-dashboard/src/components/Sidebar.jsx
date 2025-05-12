@@ -14,33 +14,30 @@ const menu = [
 
 export default function Sidebar() {
   const navigate = useNavigate();
-  const [active, setActive] = useState("Home"); // Keep for visual highlighting
-  const [isAdmin, setIsAdmin] = useState(false); // State to track admin status
+  const [active, setActive] = useState("Home");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  // Check admin status on component mount and listen for changes
   useEffect(() => {
     const checkAdminStatus = () => {
       setIsAdmin(localStorage.getItem('isAdmin') === 'true');
     };
 
-    checkAdminStatus(); // Initial check
+    checkAdminStatus();
 
-    // Listen for changes in localStorage (e.g., from login/logout page)
     window.addEventListener('storage', checkAdminStatus);
 
-    // Clean up the event listener
     return () => {
       window.removeEventListener('storage', checkAdminStatus);
     };
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('isAdmin'); // Remove the admin flag
-    window.location.reload(); // Refresh the page
+    localStorage.removeItem('isAdmin');
+    window.location.reload();
   };
 
   const handleLoginClick = () => {
-    navigate('/admin'); // Navigate to the login page
+    navigate('/admin');
   };
 
 

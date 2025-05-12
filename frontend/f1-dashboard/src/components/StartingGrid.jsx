@@ -4,7 +4,6 @@ import "./StartingGrid.css";
 export default function StartingGrid({ results, drivers }) {
   const getDriver = (driverId) => drivers.find((d) => d.id === driverId);
 
-  // Sort results by grid position
   const sortedResults = Array.isArray(results)
     ? [...results].sort((a, b) => a.gridPosition - b.gridPosition)
     : [];

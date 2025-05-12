@@ -58,7 +58,6 @@
 .result-fields label {
   display: inline-block;
   width: 70px;
-  /* Adjust label width */
   margin-right: 10px;
   font-size: 0.9em;
   color: #b0b3c6;
@@ -108,14 +107,10 @@
 
 .fastest-lap-rank-display {
   display: inline-block;
-  /* To align with label */
   width: calc(100% - 80px);
-  /* Match input width approx */
   padding: 5px 8px;
   margin-bottom: 8px;
   color: #fff;
-  /* White text */
   font-size: 1em;
   line-height: 1.5;
-  /* Adjust line height to match input */
 }

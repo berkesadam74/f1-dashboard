@@ -18,10 +18,8 @@ export default function NextRaces() {
   const formatDateRange = (isoDate) => {
     if (!isoDate) return "";
     const date = new Date(isoDate);
-    // Assuming race weekend is Fri-Sun, get Fri and Sun dates
     const raceDay = date.getUTCDate();
     const month = date.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
-    // This is a simplification, real race weekends might vary
     const startDay = raceDay - 2 > 0 ? raceDay - 2 : raceDay; // Approx Fri
     const endDay = raceDay; // Sun
     return `${startDay}-${endDay} ${month}`;

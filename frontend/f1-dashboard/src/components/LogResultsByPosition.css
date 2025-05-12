@@ -63,14 +63,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* Space between label/input pairs */
 }
 
 .position-fields label {
   font-size: 0.9em;
   color: #b0b3c6;
   margin-bottom: 2px;
-  /* Small space above input */
 }
 
 .position-fields input[type="number"],
@@ -82,9 +80,7 @@
   color: #fff;
   padding: 6px 10px;
   width: 100%;
-  /* Make inputs fill width */
   box-sizing: border-box;
-  /* Include padding in width */
 }
 
 .position-fields select {
@@ -93,7 +89,6 @@
 
 .position-fields input:disabled {
   background: #3a3f60;
-  /* Style for disabled inputs */
   cursor: not-allowed;
 }
 

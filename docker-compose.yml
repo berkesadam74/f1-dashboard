@@ -27,7 +27,11 @@ services:
       - mongodb
 
   frontend:
-    build: ./frontend/f1-dashboard/
+    build:
+      context: ./frontend/f1-dashboard/
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL_ARG: http://backend:8080/api
     container_name: frontend-f1
     restart: always
     ports:

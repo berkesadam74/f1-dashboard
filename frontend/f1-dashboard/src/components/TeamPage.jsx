@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./ResultsComponent.css"; // Reuse your styles
+import "./ResultsComponent.css";
 
-// Helper functions for images
 const getFlagUrl = (nationality) =>
   `/flags/${nationality.toLowerCase().replace(/ /g, "_")}.svg`;
 
@@ -12,7 +11,6 @@ const getDriverImgUrl = (firstName, lastName) =>
 function DriversModal({ open, onClose, team, drivers, results }) {
   if (!open || !team) return null;
 
-  // Helper to get best result for a driver (lowest position)
   const getBestResultForDriver = (driverId) => {
     const driverResults = results.filter(
       (r) => r.driverId === driverId && r.position > 0
@@ -212,7 +210,6 @@ export default function TeamPage() {
     );
   }
 
-  // Helper to get drivers for a team
   const getDriversForTeam = (teamId) =>
     drivers.filter((d) => d.teamId === teamId);
 
@@ -231,7 +228,6 @@ export default function TeamPage() {
               <div style={{ color: "#fff", marginBottom: 8, fontWeight: 900 }}>
                 {team.name}
               </div>
-              {/* Car image with gradient overlay */}
               <div style={{ position: "relative", width: "95%", maxWidth: 520 }}>
                 <img
                   src={carImgSrc}

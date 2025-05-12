@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AdminLoginPage.css'; // Create this CSS file
+import './AdminLoginPage.css';
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Simple hardcoded password for the school project (replace with real auth if needed)
-  const ADMIN_PASSWORD = 'admin'; // Replace with your desired password
+  const ADMIN_PASSWORD = 'admin';
 
   const handleLogin = () => {
     if (password === ADMIN_PASSWORD) {
-      // Store a flag in localStorage or state that the user is admin
       localStorage.setItem('isAdmin', 'true');
-      navigate('/calendar'); // Redirect to calendar after login (or where you want)
-      window.location.reload(); // Refresh the page
+      navigate('/calendar');
+      window.location.reload();
     } else {
       setError('Invalid password');
     }

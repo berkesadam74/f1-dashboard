@@ -11,7 +11,6 @@ export default function Calendar() {
   const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
 
-  // Check admin status on component mount and whenever localStorage might change
   useEffect(() => {
     const checkAdminStatus = () => {
       setIsAdmin(localStorage.getItem('isAdmin') === 'true');

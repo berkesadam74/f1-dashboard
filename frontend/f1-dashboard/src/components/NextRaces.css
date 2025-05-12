@@ -78,11 +78,9 @@
 
 .next-race-map {
   width: 40px;
-  /* Adjust size */
   height: 20px;
   object-fit: contain;
   filter: brightness(1.2) contrast(0.8) grayscale(0.5);
-  /* Subtle map style */
   margin-left: 10px;
   flex-shrink: 0;
 }

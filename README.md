@@ -3,6 +3,12 @@
 
 This project is a full-stack application designed to provide a dashboard for viewing Formula 1 data. It's built with a modern technology stack to ensure a responsive and efficient user experience.
 
+## Demo
+
+Here's a short demonstration of the F1 Dashboard in action:
+
+![F1 Dashboard Demo GIF](assets/demo.gif)
+
 ## Table of Contents
 
 - [Features](#features)
