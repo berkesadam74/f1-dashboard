@@ -1,0 +1,121 @@
+.log-results-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #181c2f;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  margin: 20px auto;
+  padding: 32px 24px;
+  color: #fff;
+}
+
+.log-results-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.log-results-back {
+  background: none;
+  border: none;
+  color: #b0b3c6;
+  font-size: 1em;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.log-results-back:hover {
+  filter: brightness(1.2);
+}
+
+.log-results-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.results-entry-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.driver-result-entry {
+  background: #23284a;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 250px;
+}
+
+.driver-name-label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.result-fields label {
+  display: inline-block;
+  width: 70px;
+  /* Adjust label width */
+  margin-right: 10px;
+  font-size: 0.9em;
+  color: #b0b3c6;
+}
+
+.result-fields input[type="number"],
+.result-fields input[type="text"] {
+  background: #181c2f;
+  border: 1px solid #2d335c;
+  border-radius: 4px;
+  color: #fff;
+  padding: 5px 8px;
+  margin-bottom: 8px;
+  width: calc(100% - 20px);
+}
+
+.log-results-actions {
+  margin-top: 30px;
+  text-align: right;
+}
+
+.log-results-actions button {
+  background: #f857a6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.log-results-actions button:disabled {
+  background: #b0b3c6;
+  cursor: not-allowed;
+}
+
+.log-results-actions .delete-button {
+  background: #ff4d4d;
+  margin-left: 15px;
+}
+
+.log-results-actions .delete-button:hover {
+  background: #e04d4d;
+}
+
+.fastest-lap-rank-display {
+  display: inline-block;
+  /* To align with label */
+  width: calc(100% - 80px);
+  /* Match input width approx */
+  padding: 5px 8px;
+  margin-bottom: 8px;
+  color: #fff;
+  /* White text */
+  font-size: 1em;
+  line-height: 1.5;
+  /* Adjust line height to match input */
+}

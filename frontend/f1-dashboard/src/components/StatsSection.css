@@ -1,0 +1,6 @@
+.stats-section {
+  display: flex;
+  max-height: fit-content;
+  gap: 35px;
+  justify-content: space-evenly;
+}

@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: mongodb-f1
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: heslo123
+      MONGO_INITDB_DATABASE: f1db
+    volumes:
+      - mongo-data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  backend:
+    build: ./backend/f1-app/
+    container_name: backend-f1
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:heslo123@mongodb:27017/f1db?authSource=admin
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./frontend/f1-dashboard/
+    container_name: frontend-f1
+    restart: always
+    ports:
+      - 3000:80
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:

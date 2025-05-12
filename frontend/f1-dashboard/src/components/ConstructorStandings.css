@@ -1,0 +1,64 @@
+.constructors-card {
+  background: #181c2f;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  max-width: 500px;
+  min-width: 500px;
+  margin: 20px;
+  padding: 24px 18px;
+  color: #fff;
+  height: fit-content;
+}
+
+.constructors-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.constructors-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.constructor-row {
+  display: flex;
+  align-items: center;
+}
+
+.constructor-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 14px;
+  border-radius: 6px;
+  background: #fff1;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+}
+
+.constructor-name {
+  font-weight: 500;
+  font-size: 1.08em;
+  color: #fff;
+}
+
+.constructor-points {
+  font-weight: 700;
+  color: #b0b3c6;
+  text-align: right;
+  font-size: 1.15em;
+  padding-left: 18px;
+  min-width: 60px;
+}
+
+.constructor-bg-row {
+  transition: background 0.2s;
+  margin: 0;
+}
+
+.constructor-bg-row:hover {
+  filter: brightness(1.1);
+}

@@ -1,0 +1,210 @@
+.results-overview-card {
+  background: #181c2f;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  padding: 18px 24px;
+  margin-top: 20px;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.results-back {
+  background: #6a5af9;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.results-back:hover {
+  background: #646cff;
+}
+
+.results-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  flex-grow: 1;
+}
+
+.results-date {
+  color: #b0b3c6;
+  font-size: 1.1em;
+}
+
+.results-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.results-table-card {
+  background: #181c2f;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  padding: 24px;
+  color: #fff;
+  flex: 1.5;
+  min-width: fit-content;
+  max-height: fit-content;
+  margin: 20px 0;
+}
+
+
+.results-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 85x;
+}
+
+.results-table th {
+  color: #b0b3c6;
+  font-weight: 600;
+  text-align: left;
+  padding-bottom: 8px;
+}
+
+.row-index-results {
+  width: 45px;
+  text-align: center;
+  font-weight: 600;
+  color: #b0b3c6;
+  margin-right: 18px;
+  flex-shrink: 0;
+}
+
+.results-table thead tr th:nth-child(3) {
+  margin-left: 50px;
+}
+
+
+.results-table thead tr th:nth-child(4),
+.results-table thead tr th:nth-child(5),
+.results-table thead tr th:nth-child(6) {
+  text-align: right;
+}
+
+.results-table td {
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+
+.status-cell {
+  font-weight: 700;
+  color: #fff;
+  text-align: right;
+  font-size: 1.1em;
+  min-width: 105px;
+  margin-left: 30px;
+  flex-shrink: 0;
+}
+
+.time-cell {
+  font-weight: 700;
+  color: #fff;
+  text-align: right;
+  font-size: 1.1em;
+  min-width: 105px;
+  margin-left: 30px;
+  flex-shrink: 0;
+}
+
+.first-time-cell {
+  color: #2af563;
+}
+
+.other-time-cell {
+  color: #f52a48;
+}
+
+.dnf {
+  color: yellow;
+}
+
+.points-cell-results {
+  font-weight: 700;
+  color: #fff;
+  text-align: right;
+  font-size: 1.1em;
+  min-width: 40px;
+  margin-left: 18px;
+  flex-shrink: 0;
+}
+
+.results-flag-img {
+  width: 22px;
+  height: 16px;
+  border-radius: 2px;
+  margin-right: 10px;
+  object-fit: cover;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.results-team-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-right: 8px;
+}
+
+.no-results-banner {
+  background: #181c2f;
+  border-radius: 18px;
+  padding: 50px;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  font-size: 2rem;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.results-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #23284a;
+  border-radius: 12px;
+  padding: 9px 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+  min-height: 45px;
+}
+
+.driver-info-row-results {
+  display: flex;
+  align-items: center;
+  min-width: 220px;
+  max-width: 220px;
+  flex: 1;
+}
+
+.pos-indicator {
+  margin-left: 6px;
+  font-size: 1.1em;
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+.pos-indicator.up {
+  color: #2af563;
+}
+
+.pos-indicator.down {
+  color: #f52a48;
+}
+
+.pos-indicator.same {
+  color: #a259f7;
+  font-size: 1.4em;
+  font-weight: 900;
+  height: 2px;
+}

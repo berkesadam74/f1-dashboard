@@ -1,0 +1,119 @@
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #181c2f;
+  border-radius: 18px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25);
+  margin: 20px auto;
+  padding: 32px 24px;
+  color: #fff;
+}
+
+.calendar-title {
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.calendar-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.calendar-race {
+  background: #23284a;
+  border-radius: 14px;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 260px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+  max-width: 330px;
+  min-width: 330px;
+}
+
+.calendar-race-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.calendar-flag-img {
+  width: 28px;
+  height: 20px;
+  border-radius: 3px;
+  object-fit: cover;
+  margin-right: 6px;
+}
+
+.calendar-race-name {
+  font-weight: 600;
+  font-size: 1.1em;
+  width: 260px;
+}
+
+.calendar-date {
+  margin-left: auto;
+  font-size: 1em;
+  color: #f857a6;
+}
+
+.calendar-circuit-name {
+  font-size: 1em;
+  color: #b0b3c6;
+  margin-bottom: 10px;
+}
+
+.calendar-circuit-map {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+
+.calendar-circuit-img {
+  width: 120px;
+  height: 60px;
+  object-fit: contain;
+  filter: brightness(1.2);
+}
+
+.calendar-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.calendar-btn {
+  background: #6a5af9;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.calendar-btn.log-btn {
+  background: #f857a6;
+}
+
+.calendar-btn.results-btn {
+  background: #6a5af9;
+}
+
+.calendar-btn:hover {
+  filter: brightness(1.1);
+}
+
+.dashboard-widgets {
+  margin: 0px 50px;
+}

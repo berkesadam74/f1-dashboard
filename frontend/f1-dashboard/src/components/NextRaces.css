@@ -1,0 +1,88 @@
+.next-races-card {
+  background: #181c2f;
+  border-radius: 16px;
+  padding: 18px;
+  color: #fff;
+  min-width: 500px;
+  max-width: 500px;
+  margin: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+  max-height: fit-content;
+}
+
+.next-races-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #fff;
+  text-align: left;
+}
+
+.next-races-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.next-race-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #2d335c;
+}
+
+.next-race-item:hover {
+  filter: brightness(1.2);
+}
+
+.next-races-list li:last-child {
+  border-bottom: none;
+}
+
+.next-race-flag {
+  width: 28px;
+  height: 20px;
+  border-radius: 3px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.next-race-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.next-race-country {
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.next-race-circuit {
+  font-size: 0.9em;
+  color: #b0b3c6;
+}
+
+.next-race-date {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: #b0b3c6;
+  margin-left: auto;
+  padding-left: 10px;
+  flex-shrink: 0;
+}
+
+.next-race-map {
+  width: 40px;
+  /* Adjust size */
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(1.2) contrast(0.8) grayscale(0.5);
+  /* Subtle map style */
+  margin-left: 10px;
+  flex-shrink: 0;
+}
