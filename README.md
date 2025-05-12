@@ -23,7 +23,7 @@ Here's a short demonstration of the F1 Dashboard in action:
 
 ## Features
 
-- **Data Visualization:** (Results of races, Diagrams for top5 fastest laps in season, Top5 wins in the season, TOP5 podiums and TOP5 polepositions, Constructors Standings, Drivers Standings, Race Calendar, Logging/Viewing Results)
+- **Data Visualization:** (Drivers standings, Constructors standings, Top5 - Pole positions, Fastest laps, Wins, Podiums, Next 5 races, Results viewing/logging, Teams page)
 - **Responsive Design:** Accessible on various devices.
 - **Modern User Interface:** (Frontend built in React - Componental architecture)
 - **Robust Backend:** (Built in Java Spring)
